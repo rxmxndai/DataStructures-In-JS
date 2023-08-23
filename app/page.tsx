@@ -1,5 +1,4 @@
 import Link from "next/link"
-import styles from "./page.module.css"
 import type { Metadata } from 'next'
  
 export const metadata: Metadata = {
@@ -10,8 +9,13 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <main >
-      <h1> Hello World!</h1>
-      <Link href="/about" > Go to About Page </Link>
+      <h1> Home Page </h1>
+      <p>
+      <Link href="/users" > Users </Link>
+      </p>
+      <p>
+      <Link href="/about" > About </Link>
+      </p>
     </main>
   )
 }
