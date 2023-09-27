@@ -42,6 +42,22 @@ class LinkedList {
         console.log(array);
     }
 
+
+    remove (index) {
+        if (index > this.length) return;
+
+        const prevNode = this.traverseToIndex(index - 1)
+        const nextNode = this.traverseToIndex(index + 1);
+
+        delete prevNode.next;
+
+        prevNode.next = nextNode;
+        this.length--;
+        return this.printLinkedList();
+    }
+
+
+
     insert (index, value) {
         // check params
         if (index >= this.length) {
@@ -85,9 +101,12 @@ myLinkedList.prepend(10)
 
 
 // insert
+console.log("Insert 99 at index 2: ");
 myLinkedList.insert(2, 99)
 
 // remove
+console.log("Remove index 2: ");
+myLinkedList.remove(2)
 
-
+// console.log(myLinkedList.head);
 
