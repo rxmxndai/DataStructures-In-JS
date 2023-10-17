@@ -9,10 +9,7 @@ class Node {
 
 class LinkedList {
     constructor (value) {
-        this.head = {
-            value,
-            next: null
-        }
+        this.head = new Node(value)
         this.tail = this.head;
         this.length = 1;
     }
@@ -46,12 +43,14 @@ class LinkedList {
     remove (index) {
         if (index > this.length) return;
 
-        const prevNode = this.traverseToIndex(index - 1)
-        const nextNode = this.traverseToIndex(index + 1);
-
-        delete prevNode.next;
-
-        prevNode.next = nextNode;
+        if (index === 0) {
+            this.head = this.head.next;
+          } else {
+            const prevNode = this.traverseToIndex(index - 1);
+            const nextNode = prevNode.next.next;
+        
+            prevNode.next = nextNode;
+          }
         this.length--;
         return this.printLinkedList();
     }
