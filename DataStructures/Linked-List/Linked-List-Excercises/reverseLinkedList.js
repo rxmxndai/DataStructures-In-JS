@@ -1,14 +1,14 @@
+// Using Singly Linked List to reverse the list
 
 class Node {
     constructor (value) {
         this.value = value,
-        this.prev = null,
         this.next = null
     }
 }
 
 
-class DoublyLinkedList {
+class LinkedList {
     constructor (value) {
         this.head = new Node(value)
         this.tail = this.head;
@@ -17,7 +17,6 @@ class DoublyLinkedList {
     
     append (value) {
         const node = new Node(value)
-        node.prev = this.tail
         this.tail.next = node
         this.tail = node;
         this.length++;
@@ -26,7 +25,6 @@ class DoublyLinkedList {
     prepend (value) {
         const node = new Node(value)
         node.next = this.head;
-        this.head.prev = node;
         this.head = node;
         this.length++;
     }
@@ -36,7 +34,6 @@ class DoublyLinkedList {
         let currentNode = this.head;
 
         while (currentNode !== null) {
-            console.log(currentNode);
             array.push(currentNode.value)
             currentNode = currentNode.next;
         }
@@ -54,7 +51,6 @@ class DoublyLinkedList {
             const nextNode = prevNode.next.next;
         
             prevNode.next = nextNode;
-            nextNode.prev = prevNode;
           }
         this.length--;
         return this.printLinkedList();
@@ -63,7 +59,6 @@ class DoublyLinkedList {
 
 
     insert (index, value) {
-        // check params
         if (index >= this.length) {
             this.append(value)
         }
@@ -72,10 +67,8 @@ class DoublyLinkedList {
         const nextNode = prevNode.next;
         
         const node = new Node(value)
-        node.prev = prevNode
         prevNode.next = node;
         node.next = nextNode;
-        nextNode.prev = node;
 
         this.length++;
         return this.printLinkedList()
@@ -93,26 +86,30 @@ class DoublyLinkedList {
 
         return currentNode;
     }
+
+
+    reverse () {    
+        let prev = null, next = null;
+        let current = this.head;
+
+        while (current !== null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next
+        }   
+
+        this.head = prev;
+
+        return this.printLinkedList();
+    }
 }
 
-const myLinkedList = new DoublyLinkedList(20)
+const myLinkedList = new LinkedList(10)
 
-// append
-myLinkedList.append(25)
+myLinkedList.append(15)
+myLinkedList.append(20)
 myLinkedList.append(30)
+myLinkedList.insert(3, 25)
 
-//prepend
-myLinkedList.prepend(15)
-myLinkedList.prepend(10)
-
-
-// insert
-console.log("Insert 99 at index 2: ");
-myLinkedList.insert(2, 99)
-
-// remove
-console.log("Remove index 2: ");
-myLinkedList.remove(2)
-
-// console.log(myLinkedList.head);
-
+myLinkedList.reverse()
