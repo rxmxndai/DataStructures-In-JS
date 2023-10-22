@@ -31,31 +31,11 @@ MyQueue.prototype.pop = function() {
 
 
 MyQueue.prototype.peek = function() {
-    return this.firstStack[0];
+    const length = this.firstStack.length
+    return this.firstStack[length - 1];
 };
 
 
 MyQueue.prototype.empty = function() {
     return this.firstStack.length === 0 && this.secondStack.length === 0;
 };
-
-
-
-//Your MyQueue object will be instantiated and called as such:
-var obj = new MyQueue()
-
-console.log("Is Empty: ", obj.empty());
-
-
-obj.push(10)
-obj.push(20)
-obj.push(30)
-
-console.log("Peek: ", obj.peek());
-
-console.log("Pop: ", obj.pop());
-console.log("Pop: ", obj.pop());
-
-
-
-console.log(obj);
